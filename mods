@@ -1,7 +1,7 @@
 -- My version wouldnt work so i just copied swagmode's credits to swagmode for the script
 
 ModIDS = {
-  923076,
+  1,
 }
 
 Crown = {
@@ -33,6 +33,7 @@ function swagnames()
 				end
 			end
 		end
+	end
 	end
 	end
 	end
