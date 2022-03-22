@@ -8,6 +8,8 @@ Crown = {
   923076,
 }
 
+while true do
+wait()
 function swagnames()
 	for _,Player in pairs(game:GetService('Players'):GetChildren()) do
 		if table.find(ModIDS, Player.UserId) then
