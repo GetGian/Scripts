@@ -1,3 +1,9 @@
+_G.Gui = true -- UI That has everything
+_G.KorbloxandHeadless = false -- Puts on Both Korblox Leg and Headless(this is if you dont want anything else)
+_G.GunID = "" -- Still in TESTING
+_G.Gun = "[GUN HERE EXAMPLE - AUG]" -- Still in TESTING
+
+
 _, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
 
 
