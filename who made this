@@ -1,0 +1,213 @@
+local VirtualUser=game:service'VirtualUser'
+game:service'Players'.LocalPlayer.Idled:connect(function()
+VirtualUser:CaptureController()
+VirtualUser:ClickButton2(Vector2.new())
+end)
+
+
+local players, replicatedStorage = game:GetService("Players"), game:GetService("ReplicatedStorage");
+local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
+
+local onMessageDoneFiltering = defaultChatSystemChatEvents:FindFirstChild("OnMessageDoneFiltering");
+
+onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
+    local speaker, message = players[messageData.FromSpeaker], messageData.Message
+
+if game.Players.LocalPlayer.Name == Host then
+    print("Main")
+    local UserInputService = game:GetService("UserInputService")
+	local RunService = game:GetService("RunService")
+
+	local WindowFocusReleasedFunction = function()
+		RunService:Set3dRenderingEnabled(false)
+		setfpscap(8)
+		return
+	end
+
+	local WindowFocusedFunction = function()
+		RunService:Set3dRenderingEnabled(true)
+		setfpscap(360)
+		return
+	end
+
+	local Initialize = function()
+		UserInputService.WindowFocusReleased:Connect(WindowFocusReleasedFunction)
+		UserInputService.WindowFocused:Connect(WindowFocusedFunction)
+		return
+	end
+	Initialize()
+else
+    if speaker.Name == Host and message == "!drop" then
+        getgenv().drop = true
+        while getgenv().drop do
+            wait(.1)
+            game:GetService("ReplicatedStorage").MainEvent:FireServer("DropMoney", "10000")
+        end
+    elseif  speaker.Name == Host and message == "!undrop" then
+        getgenv().drop = false
+        while getgenv().drop do
+            wait(.1)
+            game:GetService("ReplicatedStorage").MainEvent:FireServer("DropMoney", "10000")
+        end
+    elseif  speaker.Name == Host and message == "!freeze" then
+
+    elseif  speaker.Name == Host and message == "!unfreeze" then
+
+    elseif  speaker.Name == Host and message == "!bring" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players[Host].Character.HumanoidRootPart.CFrame
+    elseif  speaker.Name == Host and message == "!crash" then
+loadstring(game:HttpGet('https://raw.githubusercontent.com/BetterDaHood/BetterDaHoodCrasher/main/Crash'))()
+    elseif  speaker.Name == Host and message == "!mask on" then
+        local plr = game.Players.LocalPlayer
+        local c = plr.Character
+        local Root = c.PrimaryPart
+        local OldCF = Root.CFrame
+
+        local Tries = 0 
+        repeat wait(0.1) Tries += 1
+            Root.CFrame = workspace.Ignored.Shop["[Surgeon Mask] - $25"].Head.CFrame*CFrame.new(math.random(-1,1),0,math.random(-1,1))
+            fireclickdetector(workspace.Ignored.Shop["[Surgeon Mask] - $25"].ClickDetector)
+        until Tries >= 50 or not c or not c:FindFirstChild("Humanoid") or c:FindFirstChild"Mask" or plr.Backpack:FindFirstChild"Mask"
+        wait(0.5)
+        if plr.Backpack:FindFirstChild("Mask") then
+            c.Humanoid:EquipTool(plr.Backpack.Mask)
+            c.Mask:Activate()
+        elseif c:FindFirstChild("Mask") then
+            c.Mask:Activate()
+        end
+        Root.CFrame = OldCF
+    elseif  speaker.Name == Host and message == "!hide" then
+        for r, s in pairs(workspace:GetChildren()) do
+            if s.Name == "1_Part_1" then
+                s:Destroy()
+            end
+        end
+        local t = Instance.new("Part", workspace)
+        t.Name = "1_Part_1"
+        t.Transparency = 1
+        t.CFrame =
+            CFrame.new(
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y - 11,
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z
+        )
+        t.Anchored = true
+        t.Size = Vector3.new(t.Size.X + 50, t.Size.Y + 1, t.Size.Z + 50)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+            CFrame.new(
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y - 10,
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z
+        )
+        wait(.5)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+    elseif  speaker.Name == Host and message == "!unhide" then
+        for r = 1, 7 do
+            wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+                CFrame.new(
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y + 10,
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z
+            )
+        end
+        for r, s in pairs(workspace:GetChildren()) do
+            if s.Name == "1_Part_1" then
+                s:Destroy()
+            end
+        end
+    elseif  speaker.Name == Host and message == "!print" then
+        print("Hello, World!")
+    end
+end
+end)
+
+if game.Players.LocalPlayer.Name == Host then
+warn("Main")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+
+local WindowFocusReleasedFunction = function()
+    RunService:Set3dRenderingEnabled(false)
+    setfpscap(8)
+    return
+end
+
+local WindowFocusedFunction = function()
+    RunService:Set3dRenderingEnabled(true)
+    setfpscap(360)
+    return
+end
+
+local Initialize = function()
+    UserInputService.WindowFocusReleased:Connect(WindowFocusReleasedFunction)
+    UserInputService.WindowFocused:Connect(WindowFocusedFunction)
+    return
+end
+Initialize()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/lerkermer/lua-projects/master/SwagModeV002'))()
+else
+    print("Alt")
+    setfpscap(getgenv().Fps)
+    local c = Instance.new("ScreenGui")
+    local d = Instance.new("Frame")
+    local e = Instance.new("TextLabel")
+    local f = Instance.new("TextLabel")
+    c.Name = "AltControl"
+    c.Parent = game.CoreGui
+    c.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    d.Parent = c
+    d.AnchorPoint = Vector2.new(0.5, 0.5)
+    d.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    d.BorderColor3 = Color3.fromRGB(0, 0, 0)
+    d.BorderSizePixel = 100
+    d.Position = UDim2.new(0.5, 0, 0.5, 0)
+    d.Size = UDim2.new(1, 0, 1, 0)
+    e.Parent = d
+    e.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    e.BackgroundTransparency = 1.000
+    e.Position = UDim2.new(0.437655866, 0, 0.380451113, 0)
+    e.Size = UDim2.new(0, 200, 0, 50)
+    e.Font = Enum.Font.SourceSans
+    e.Text = "Welcome To Gian's Alt Control "..game.Players.LocalPlayer.DisplayName
+    e.TextColor3 = Color3.fromRGB(255, 255, 255)
+    e.TextSize = 50.000
+    f.Parent = d
+    f.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    f.BackgroundTransparency = 1.000
+    f.Position = UDim2.new(0.437655866, 0, 0.455639064, 0)
+    f.Size = UDim2.new(0, 200, 0, 50)
+    f.Font = Enum.Font.SourceSans
+    f.Text = "Name"
+    f.TextColor3 = Color3.fromRGB(255, 255, 255)
+    f.TextSize = 50.000
+    game:GetService("RunService"):Set3dRenderingEnabled(false)
+    workspace:FindFirstChildOfClass('Terrain').WaterWaveSize = 0
+    workspace:FindFirstChildOfClass('Terrain').WaterWaveSpeed = 0
+    workspace:FindFirstChildOfClass('Terrain').WaterReflectance = 0
+    workspace:FindFirstChildOfClass('Terrain').WaterTransparency = 0
+    game:GetService("Lighting").GlobalShadows = false
+    game:GetService("Lighting").FogEnd = 9e9
+    settings().Rendering.QualityLevel = 1
+    for i,v in pairs(game:GetDescendants()) do
+        if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+            v.Material = "Plastic"
+            v.Reflectance = 0
+        elseif v:IsA("Decal") then
+            v.Transparency = 1
+        elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+            v.Lifetime = NumberRange.new(0)
+        elseif v:IsA("Explosion") then
+            v.BlastPressure = 1
+            v.BlastRadius = 1
+        end
+    end
+    for i,v in pairs(game:GetService("Lighting"):GetDescendants()) do
+        if v:IsA("BlurEffect") or v:IsA("SunRaysEffect") or v:IsA("ColorCorrectionEffect") or v:IsA("BloomEffect") or v:IsA("DepthOfFieldEffect") then
+            v.Enabled = false
+        end
+    end
+end
+
+-- who what hey? who made this
